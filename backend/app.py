@@ -2,17 +2,26 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import psycopg2
+import os
+
 
 app = Flask(__name__)
 CORS(app)
 
-# Connect to PostgreSQL database
-conn = psycopg2.connect(
-    host="localhost",
-    database="weatherapp_db",
-    user="weatherapp_user",
-    password="your_password"
-)
+
+DATABASE_URL = os.getenv('postgresql://weatherapp_db_2tqv_user:shYB2cctgYfMM3MKR9eUg2GHdyNYWhVe@dpg-cs1ol2q3esus739h1oj0-a.oregon-postgres.render.com/weatherapp_db_2tqv')
+
+conn = psycopg2.connect(DATABASE_URL)
+
+
+
+# # Connect to PostgreSQL database
+# conn = psycopg2.connect(
+#     host="localhost",
+#     database="weatherapp_db",
+#     user="weatherapp_user",
+#     password="your_password"
+# )
 cursor = conn.cursor()
 
 # Create table for storing search history
